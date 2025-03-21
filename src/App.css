@@ -1,0 +1,18 @@
+.li{
+    box-shadow:  0 0 5px 2px aqua;
+    padding: 5px 10px;
+}
+.li:hover{
+    box-shadow:  0 0 5px 2px orange inset;
+    padding: 5px 10px;
+}
+
+body{
+ background-image: url(https://images.unsplash.com/photo-1458682625221-3a45f8a844c7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+ background-size: 100% 100%;
+ background-attachment: fixed;
+ min-height: 100vh;
+ background-position: center;
+ width: 100%;
+}
+
