@@ -37,7 +37,7 @@ const Login = () => {
 
   React.useEffect(() => {
     const typed = new Typed(el.current, {
-      strings: ["Login", "Signup", "Portfolio"],
+      strings: [ "Signup", "Our Shop"],
       typeSpeed: 100,
       backSpeed: 50,
       loop: true,
