@@ -11,7 +11,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const userStore = useContext(UserContext2);
   let login = userStore.user.login;
-
+  
   const handleLogout = () => {
     userStore.setUser({ email: "", login: false });
     localStorage.setItem("Login", JSON.stringify({ email: "", login: false }));
@@ -32,15 +32,15 @@ const Navbar = () => {
           <Link to="/" className="hover:text-gray-200 transition">E-Shop</Link>
         </div>
 
-        {/* Search Bar */}
-        <form className="w-full max-w-xs">
-          <input
+        {/* Search Bar (Responsive) */}
+        <div className="hidden md:block w-1/3">
+       { login && (  <input 
             onChange={handleInputChanger}
             className="w-full px-4 py-2 text-gray-700 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
             placeholder="Search for products..."
-          />
-        </form>
+          />)}
+        </div>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex items-center space-x-6">
@@ -95,44 +95,55 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <ul className="md:hidden bg-white shadow-md p-4 space-y-4 text-gray-700 rounded-lg mt-2">
-          {login && (
-            <li onClick={() => setIsOpen(false)}>
-              <Link to="/" className="flex items-center gap-2">
-                <FaHome /> Home
-              </Link>
-            </li>
-          )}
-          {login && (
-            <li onClick={() => setIsOpen(false)}>
-              <Link to="/cart" className="flex items-center gap-2">
-                <MdAddShoppingCart size={24} /> Cart ({cartItem.length})
-              </Link>
-            </li>
-          )}
-          {!login ? (
-            <>
+        <div className="md:hidden bg-white shadow-md p-4 rounded-lg mt-2 text-gray-700">
+          {/* Mobile Search Bar */}
+          <div className="mb-4">
+          { login && (  <input 
+            onChange={handleInputChanger}
+            className="w-full px-4 py-2 text-gray-700 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="text"
+            placeholder="Search for products..."
+          />)}
+          </div>
+          <ul className="space-y-4">
+            {login && (
               <li onClick={() => setIsOpen(false)}>
-                <Link to="/login" className="flex items-center gap-2">
-                  <FaSignInAlt /> Login
+                <Link to="/" className="flex items-center gap-2">
+                  <FaHome /> Home
                 </Link>
               </li>
+            )}
+            {login && (
               <li onClick={() => setIsOpen(false)}>
-                <Link to="/signup">
-                  <button className="w-full bg-blue-600 text-white hover:bg-blue-700 transition px-4 py-2 rounded-lg">
-                    Sign Up
-                  </button>
+                <Link to="/cart" className="flex items-center gap-2">
+                  <MdAddShoppingCart size={24} /> Cart ({cartItem.length})
                 </Link>
               </li>
-            </>
-          ) : (
-            <li onClick={() => setIsOpen(false)}>
-              <button onClick={handleLogout} className="bg-white text-blue-600 hover:bg-gray-200 transition px-4 py-2 rounded-lg">
-                Logout
-              </button>
-            </li>
-          )}
-        </ul>
+            )}
+            {!login ? (
+              <>
+                <li onClick={() => setIsOpen(false)}>
+                  <Link to="/login" className="flex items-center gap-2">
+                    <FaSignInAlt /> Login
+                  </Link>
+                </li>
+                <li onClick={() => setIsOpen(false)}>
+                  <Link to="/signup">
+                    <button className="w-full bg-blue-600 text-white hover:bg-blue-700 transition px-4 py-2 rounded-lg">
+                      Sign Up
+                    </button>
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li onClick={() => setIsOpen(false)}>
+                <button onClick={handleLogout} className="w-full bg-white text-blue-600 hover:bg-gray-200 transition px-4 py-2 rounded-lg">
+                  Logout
+                </button>
+              </li>
+            )}
+          </ul>
+        </div>
       )}
     </nav>
   );
