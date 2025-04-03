@@ -12,6 +12,19 @@ const Navbar = () => {
   const userStore = useContext(UserContext2);
   let login = userStore.user.login;
 
+
+  const handleLogout= ()=>{
+userStore.setUser({email:'',login:false})
+localStorage.getItem("Login" ,JSON.stringify({email:'',login:false}))
+setIsOpen(false)
+  }
+
+
+  const handleInputChanger = (e) => {
+    let value = e.target.value.trim(); // Remove extra spaces
+    userStore.setsearchValue(value); // Update the search value in context
+  };
+  
   return (
     <nav className="bg-gradient-to-r from-blue-500 to-purple-600 shadow-md p-4 sticky top-0 z-50 text-white">
       <div className="container mx-auto flex justify-between items-center">
@@ -20,6 +33,11 @@ const Navbar = () => {
           <IoStorefrontSharp size={28} className="text-white" />
           <Link to="/" className="hover:text-gray-200 transition">E-Shop</Link>
         </div>
+
+{/* {search} */}
+        <form >
+          <input onChange={handleInputChanger} className="border" type="text"  placeholder="enter name" />
+        </form>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex items-center space-x-6">
@@ -65,6 +83,18 @@ const Navbar = () => {
               </Link>
             </li>
           )}
+
+
+
+
+        { login === true &&   <li>
+            
+                <button onClick={handleLogout} className="bg-white text-blue-600 hover:bg-gray-200 transition px-4 py-2 rounded-lg">
+                  Logout
+                </button>
+           
+            </li>}
+        
         </ul>
 
         {/* Mobile Menu Button */}
@@ -82,7 +112,7 @@ const Navbar = () => {
       {isOpen && (
         <ul className="md:hidden bg-white shadow-md p-4 space-y-4 text-gray-700 rounded-lg mt-2">
           {login && (
-            <li>
+            <li onclick={()=>setIsOpen()}>
               <Link
                 to="/"
                 className="flex items-center gap-2"
@@ -93,7 +123,7 @@ const Navbar = () => {
             </li>
           )}
           {login && (
-            <li>
+            <li onclick={()=>setIsOpen()}>
               <Link
                 to="/cart"
                 className="flex items-center gap-2"
@@ -104,7 +134,7 @@ const Navbar = () => {
             </li>
           )}
           {!login && (
-            <li>
+            <li onclick={()=>setIsOpen()}>
               <Link
                 to="/login"
                 className="flex items-center gap-2"
@@ -115,7 +145,7 @@ const Navbar = () => {
             </li>
           )}
           {!login && (
-            <li>
+            <li onclick={()=>setIsOpen()}>
               <Link to="/signup" onClick={() => setIsOpen(false)}>
                 <button className="w-full bg-blue-600 text-white hover:bg-blue-700 transition px-4 py-2 rounded-lg">
                   Sign Up
@@ -123,6 +153,15 @@ const Navbar = () => {
               </Link>
             </li>
           )}
+
+
+{ login === true &&   <li onclick={()=>setIsOpen()}>
+            
+            <button onClick={handleLogout} className="bg-white text-blue-600 hover:bg-gray-200 transition px-4 py-2 rounded-lg">
+              Logout
+            </button>
+       
+        </li>}
         </ul>
       )}
     </nav>

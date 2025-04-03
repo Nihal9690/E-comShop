@@ -21,7 +21,7 @@ const Signup = () => {
 
     if (obj.name && obj.email && obj.password) {
       let find = arr.find((ele) => ele.email === obj.email);
-    
+
       if (find) {
         return alert("User already registered");
       } else {
@@ -35,29 +35,33 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 overflow-hidden">
       <motion.form
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="bg-white max-w-sm w-full p-6 rounded-lg shadow-md"
+        className="bg-white max-w-sm w-full p-8 rounded-lg shadow-lg"
       >
-        <h3 className="text-2xl font-bold text-center text-gray-700 mb-4">Sign Up</h3>
+        <h3 className="text-2xl font-bold text-center text-gray-700 mb-6">Sign Up</h3>
+        
         <label className="block text-gray-600 mb-1">Name</label>
-        <div className="flex items-center border rounded px-3 py-2 mb-3">
+        <div className="flex items-center border rounded-lg px-3 py-2 mb-4">
           <FaUser className="text-gray-400 mr-2" />
           <input ref={nameRef} className="w-full outline-none" type="text" placeholder="Enter your name" />
         </div>
+
         <label className="block text-gray-600 mb-1">Email</label>
-        <div className="flex items-center border rounded px-3 py-2 mb-3">
+        <div className="flex items-center border rounded-lg px-3 py-2 mb-4">
           <FaEnvelope className="text-gray-400 mr-2" />
           <input ref={emailRef} className="w-full outline-none" type="email" placeholder="Enter your email" />
         </div>
+
         <label className="block text-gray-600 mb-1">Password</label>
-        <div className="flex items-center border rounded px-3 py-2 mb-4">
+        <div className="flex items-center border rounded-lg px-3 py-2 mb-4">
           <FaLock className="text-gray-400 mr-2" />
           <input ref={passwordRef} className="w-full outline-none" type="password" placeholder="Enter your password" />
         </div>
+
         <motion.button
           whileTap={{ scale: 0.95 }}
           onClick={handleSubmit}
@@ -65,7 +69,8 @@ const Signup = () => {
         >
           Sign Up
         </motion.button>
-        <p className="text-center mt-3 text-gray-500">
+
+        <p className="text-center mt-4 text-gray-500">
           Already have an account? <Link className="text-blue-500" to={'/login'}>Login</Link>
         </p>
       </motion.form>
